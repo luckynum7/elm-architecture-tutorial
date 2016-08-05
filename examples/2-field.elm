@@ -1,17 +1,18 @@
-import Html exposing (Html, Attribute, div, input, text)
+module Main exposing (..)
+
+import Html exposing (Html, Attribute, button, div, input, text)
 import Html.App as Html
 import Html.Attributes exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onClick, onInput)
 import String
 
 
-
 main =
-  Html.beginnerProgram
-    { model = model
-    , view = view
-    , update = update
-    }
+    Html.beginnerProgram
+        { model = model
+        , view = view
+        , update = update
+        }
 
 
 
@@ -19,13 +20,13 @@ main =
 
 
 type alias Model =
-  { content : String
-  }
+    { content : String
+    }
 
 
 model : Model
 model =
-  Model ""
+    Model ""
 
 
 
@@ -33,13 +34,18 @@ model =
 
 
 type Msg
-  = Change String
+    = Change String
+    | Reset
+
 
 update : Msg -> Model -> Model
 update msg model =
-  case msg of
-    Change newContent ->
-      { model | content = newContent }
+    case msg of
+        Change newContent ->
+            { model | content = newContent }
+
+        Reset ->
+            { model | content = "" }
 
 
 
@@ -48,7 +54,8 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ input [ placeholder "Text to reverse", onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    ]
+    div []
+        [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
+        , button [ onClick Reset ] [ text "reset" ]
+        , div [] [ text (String.reverse model.content) ]
+        ]
