@@ -66,10 +66,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ -- input [ type' "text", placeholder "Name", onInput Name ] []
-          -- , input [ type' "password", placeholder "Password", onInput Password ] []
-          -- , input [ type' "password", placeholder "Re-enter Password", onInput PasswordAgain ] []
-          viewInput { type' = "text", name = "Name", mesg = Name }
+        [ viewInput { type' = "text", name = "Name", mesg = Name }
         , viewInput { type' = "password", name = "Password", mesg = Password }
         , viewInput { type' = "password", name = "Re-enter Password", mesg = PasswordAgain }
         , viewInput { type' = "text", name = "Age", mesg = Age }
