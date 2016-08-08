@@ -23,12 +23,13 @@ type alias Model =
     { name : String
     , password : String
     , passwordAgain : String
+    , age : String
     }
 
 
 model : Model
 model =
-    Model "" "" ""
+    Model "" "" "" ""
 
 
 
@@ -39,6 +40,7 @@ type Msg
     = Name String
     | Password String
     | PasswordAgain String
+    | Age String
 
 
 update : Msg -> Model -> Model
@@ -52,6 +54,9 @@ update msg model =
 
         PasswordAgain password ->
             { model | passwordAgain = password }
+
+        Age age ->
+            { model | age = age }
 
 
 
@@ -67,6 +72,7 @@ view model =
           viewInput { type' = "text", name = "Name", mesg = Name }
         , viewInput { type' = "password", name = "Password", mesg = Password }
         , viewInput { type' = "password", name = "Re-enter Password", mesg = PasswordAgain }
+        , viewInput { type' = "text", name = "Age", mesg = Age }
         , viewValidation model
         ]
 
@@ -79,6 +85,8 @@ viewValidation model =
                 ( "orange", "Password must contains at least one lower case character, one upper case character, one digital number, with at least 8 characters." )
             else if model.password /= model.passwordAgain then
                 ( "red", "Passwords do not match!" )
+            else if not (contains (regex "^[1-9][0-9]{0,2}$") model.age) then
+                ( "purple", "Age must be a number, and at most have three digitals" )
             else
                 ( "green", "OK" )
     in
@@ -86,7 +94,6 @@ viewValidation model =
 
 
 
--- "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$"
 -- ViewInput
 
 
