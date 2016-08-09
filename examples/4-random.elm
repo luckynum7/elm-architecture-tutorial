@@ -2,8 +2,12 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.App as Html
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Random
+
+
+-- import Style exposing (..)
 
 
 main =
@@ -64,6 +68,21 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text (toString model.dieFace) ]
+        [ div [ toStyle model ] []
+        , h1 [] [ text (toString model.dieFace) ]
         , button [ onClick Roll ] [ text "Roll" ]
         ]
+
+
+toStyle : Model -> Attribute msg
+toStyle model =
+    -- 2,-213, -428, -643, -858, -1073 | 217 - 215 * n(1-6)
+    let
+        x =
+            toString (217 - 215 * model.dieFace)
+    in
+        style
+            [ ( "background", "url(\"/dice.png\") " ++ x ++ "px -215px no-repeat" )
+            , ( "height", "210px" )
+            , ( "width", "210px" )
+            ]
