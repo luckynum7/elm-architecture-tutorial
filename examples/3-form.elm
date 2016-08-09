@@ -1,6 +1,4 @@
--- TODO:
--- 1. ViewInput 是否还有其它实现方式
--- 2. Add a "Submit" button. Only show errors after it has been pressed.
+-- TODO: Add a "Submit" button. Only show errors after it has been pressed.
 
 
 module Main exposing (..)
@@ -71,10 +69,10 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ viewInput { type' = "text", name = "Name", mesg = Name }
-        , viewInput { type' = "password", name = "Password", mesg = Password }
-        , viewInput { type' = "password", name = "Re-enter Password", mesg = PasswordAgain }
-        , viewInput { type' = "text", name = "Age", mesg = Age }
+        [ viewInput "text" "Name" Name
+        , viewInput "password" "Password" Password
+        , viewInput "password" "Re-enter Password" PasswordAgain
+        , viewInput "text" "Age" Age
         , viewValidation model
         ]
 
@@ -99,16 +97,9 @@ viewValidation model =
 -- ViewInput
 
 
-type alias ViewInput =
-    { type' : String
-    , name : String
-    , mesg : String -> Msg
-    }
-
-
-viewInput : ViewInput -> Html Msg
-viewInput viewInput =
+viewInput : String -> String -> (String -> Msg) -> Html Msg
+viewInput typ name msg =
     div []
-        [ span [] [ text viewInput.name ]
-        , input [ type' viewInput.type', placeholder viewInput.name, onInput viewInput.mesg ] []
+        [ span [] [ text name ]
+        , input [ type' typ, placeholder name, onInput msg ] []
         ]
