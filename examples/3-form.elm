@@ -1,3 +1,8 @@
+-- TODO:
+-- 1. ViewInput 是否还有其它实现方式
+-- 2. Add a "Submit" button. Only show errors after it has been pressed.
+
+
 module Main exposing (..)
 
 import Html exposing (..)
