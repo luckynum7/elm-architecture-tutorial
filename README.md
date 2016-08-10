@@ -18,8 +18,4 @@ Now go to <http://localhost:8000/> and start looking at the `examples/` director
 
 When you edit an Elm file, just refresh the corresponding page in your browser and it will recompile. After you get comfortable with things in the `examples/` directory, check out the `nesting/` directory which has examples of snapping components together.
 
-## Exercises
-
-Check out the `sandbox` branch.
-
 [arch]: http://guide.elm-lang.org/architecture/index.html
