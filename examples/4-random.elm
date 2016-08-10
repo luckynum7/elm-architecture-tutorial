@@ -1,3 +1,7 @@
+-- TODO: Instead of showing an image of a die face, use the elm-lang/svg library to draw it yourself.
+-- TODO: After you have learned about tasks and animation, have the die flip around randomly before they settle on a final value.
+
+
 module Main exposing (..)
 
 import Html exposing (..)
