@@ -30,7 +30,7 @@ type alias Model =
 
 init : String -> ( Model, Cmd Msg )
 init topic =
-    ( Model topic "waiting.gif"
+    ( Model topic "/waiting.gif"
     , getRandomGif topic
     )
 
