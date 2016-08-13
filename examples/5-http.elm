@@ -25,12 +25,13 @@ main =
 type alias Model =
     { topic : String
     , gifUrl : String
+    , error : String
     }
 
 
 init : String -> ( Model, Cmd Msg )
 init topic =
-    ( Model topic "/waiting.gif"
+    ( Model topic "/waiting.gif" ""
     , getRandomGif topic
     )
 
@@ -52,7 +53,7 @@ update msg model =
             ( model, getRandomGif model.topic )
 
         FetchSucceed newUrl ->
-            ( Model model.topic newUrl, Cmd.none )
+            ( Model model.topic newUrl "", Cmd.none )
 
         FetchFail _ ->
             ( model, Cmd.none )
@@ -69,6 +70,7 @@ view model =
         , button [ onClick MorePlease ] [ text "More Please!" ]
         , br [] []
         , img [ src model.gifUrl ] []
+        , div [] [ text model.error ]
         ]
 
 
