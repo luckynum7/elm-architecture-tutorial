@@ -56,7 +56,7 @@ update msg model =
             ( Model model.topic newUrl "", Cmd.none )
 
         FetchFail httpError ->
-            ( { model | error = "error!" }, Cmd.none )
+            ( { model | error = toString httpError }, Cmd.none )
 
 
 
