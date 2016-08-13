@@ -42,6 +42,7 @@ init topic =
 
 type Msg
     = MorePlease
+    | Topic String
     | FetchSucceed String
     | FetchFail Http.Error
 
@@ -51,6 +52,9 @@ update msg model =
     case msg of
         MorePlease ->
             ( model, getRandomGif model.topic )
+
+        Topic topic ->
+            ( { model | topic = topic }, Cmd.none )
 
         FetchSucceed newUrl ->
             ( Model model.topic newUrl "", Cmd.none )
@@ -67,6 +71,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ h2 [] [ text model.topic ]
+        , input [ type' "text", value model.topic, onInput Topic ] []
         , button [ onClick MorePlease ] [ text "More Please!" ]
         , br [] []
         , img [ src model.gifUrl ] []
