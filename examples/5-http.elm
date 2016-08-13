@@ -107,4 +107,15 @@ decodeGifUrl =
 
 explainError : Http.Error -> String
 explainError httpError =
-    "Error!"
+    case httpError of
+        Http.Timeout ->
+            "Timeout!"
+
+        Http.NetworkError ->
+            "NetworkError!"
+
+        Http.UnexpectedPayload payload ->
+            "UnexpectedPayload!" ++ payload
+
+        Http.BadResponse code message ->
+            "BadResponse!" ++ toString code ++ ":" ++ message
