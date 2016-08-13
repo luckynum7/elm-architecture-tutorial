@@ -56,7 +56,7 @@ update msg model =
             ( Model model.topic newUrl "", Cmd.none )
 
         FetchFail httpError ->
-            ( { model | error = toString httpError }, Cmd.none )
+            ( { model | error = explainError httpError }, Cmd.none )
 
 
 
@@ -99,3 +99,12 @@ getRandomGif topic =
 decodeGifUrl : Json.Decoder String
 decodeGifUrl =
     Json.at [ "data", "fixed_height_downsampled_url" ] Json.string
+
+
+
+-- ExplainError
+
+
+explainError : Http.Error -> String
+explainError httpError =
+    "Error!"
