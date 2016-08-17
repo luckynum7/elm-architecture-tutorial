@@ -1,3 +1,5 @@
+-- TODO: Allow the user to modify the topic with a drop down menu
+
 module Main exposing (..)
 
 import Html exposing (..)
