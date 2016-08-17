@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Debug
 import Html exposing (Html)
 import Html.App as Html
 import Svg exposing (..)
@@ -42,6 +43,7 @@ update msg model =
     case msg of
         Tick newTime ->
             ( newTime, Cmd.none )
+                |> Debug.log "newTime"
 
 
 
