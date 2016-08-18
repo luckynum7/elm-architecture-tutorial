@@ -43,7 +43,6 @@ update msg model =
     case msg of
         Tick newTime ->
             ( newTime, Cmd.none )
-                |> Debug.log "newTime"
 
 
 
@@ -64,6 +63,7 @@ view model =
     let
         angle =
             turns (Time.inMinutes model)
+                |> Debug.log "angle"
 
         handX =
             toString (50 + 40 * cos angle)
