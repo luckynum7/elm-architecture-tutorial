@@ -63,7 +63,10 @@ view model =
     let
         angle =
             turns (Time.inMinutes model)
-                |> Debug.log "angle"
+                -- degrees 270.0
+                -- turns 0.75
+                |>
+                    Debug.log "angle"
 
         handX =
             toString (50 + 40 * cos angle)
