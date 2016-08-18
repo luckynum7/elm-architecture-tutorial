@@ -61,12 +61,14 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     let
+        second' =
+            floor model // 1000 % 60
+
         angle =
-            turns (Time.inMinutes model)
-                -- degrees 270.0
-                -- turns 0.75
-                |>
-                    Debug.log "angle"
+            -- degrees 270.0
+            -- turns 0.75
+            turns (toFloat second' / 60 - 0.25)
+                |> Debug.log "angle"
 
         handX =
             toString (50 + 40 * cos angle)
