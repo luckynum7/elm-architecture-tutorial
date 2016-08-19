@@ -1,3 +1,6 @@
+--TODO: Add a button to pause the clock, turning the Time subscription off
+
+
 module Main exposing (..)
 
 import Html exposing (Html)
