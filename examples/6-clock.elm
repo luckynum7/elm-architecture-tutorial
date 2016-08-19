@@ -64,19 +64,31 @@ view model =
         second' =
             floor model // 1000 % 60
 
+        minute' =
+            floor model // 60000 % 60
+
         angle =
-            -- degrees 270.0
-            -- turns 0.75
+            -- degrees 270.0, turns 0.75
             turns (toFloat second' / 60 - 0.25)
                 |> Debug.log "angle"
+
+        angle' =
+            turns (toFloat minute' / 60 - 0.25)
 
         handX =
             toString (50 + 40 * cos angle)
 
+        handX' =
+            toString (50 + 40 * cos angle')
+
         handY =
-            toString (50 + 40 * sin angle)
+            toString (50 + 30 * sin angle)
+
+        handY' =
+            toString (50 + 30 * sin angle')
     in
         svg [ viewBox "0 0 100 100", width "300px" ]
             [ circle [ cx "50", cy "50", r "45", fill "#0B79CE" ] []
             , line [ x1 "50", y1 "50", x2 handX, y2 handY, stroke "#023963" ] []
+            , line [ x1 "50", y1 "50", x2 handX', y2 handY', stroke "#0219a3" ] []
             ]
