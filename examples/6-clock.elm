@@ -1,7 +1,5 @@
 module Main exposing (..)
 
--- import Debug
-
 import Html exposing (Html)
 import Html.App as Html
 import Svg exposing (..)
@@ -65,28 +63,25 @@ view model =
         second' =
             floor model // 1000 % 60
 
-        minute' =
-            floor model // 60000 % 60
-
         angle =
             -- degrees 270.0, turns 0.75
             turns (toFloat second' / 60 - 0.25)
 
-        -- |> Debug.log ("angle")
-        angle' =
-            turns (toFloat minute' / 60 - 0.25)
-
         handX =
             toString (50 + 40 * cos angle)
-
-        -- |> Debug.log ("handX")
-        handX' =
-            toString (50 + 35 * cos angle')
 
         handY =
             toString (50 + 40 * sin angle)
 
-        -- |> Debug.log ("handY")
+        minute' =
+            floor model // 60000 % 60
+
+        angle' =
+            turns (toFloat minute' / 60 - 0.25)
+
+        handX' =
+            toString (50 + 35 * cos angle')
+
         handY' =
             toString (50 + 35 * sin angle')
     in
