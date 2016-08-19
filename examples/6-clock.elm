@@ -1,6 +1,7 @@
 module Main exposing (..)
 
-import Debug
+-- import Debug
+
 import Html exposing (Html)
 import Html.App as Html
 import Svg exposing (..)
@@ -70,22 +71,24 @@ view model =
         angle =
             -- degrees 270.0, turns 0.75
             turns (toFloat second' / 60 - 0.25)
-                |> Debug.log "angle"
 
+        -- |> Debug.log ("angle")
         angle' =
             turns (toFloat minute' / 60 - 0.25)
 
         handX =
             toString (50 + 40 * cos angle)
 
+        -- |> Debug.log ("handX")
         handX' =
-            toString (50 + 40 * cos angle')
+            toString (50 + 35 * cos angle')
 
         handY =
-            toString (50 + 30 * sin angle)
+            toString (50 + 40 * sin angle)
 
+        -- |> Debug.log ("handY")
         handY' =
-            toString (50 + 30 * sin angle')
+            toString (50 + 35 * sin angle')
     in
         svg [ viewBox "0 0 100 100", width "300px" ]
             [ circle [ cx "50", cy "50", r "45", fill "#0B79CE" ] []
