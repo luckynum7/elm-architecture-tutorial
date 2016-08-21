@@ -5,6 +5,11 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
 
+-- Project imports
+
+import Constants
+
+
 -- MODEL
 
 
@@ -30,10 +35,10 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment ->
-            model + 1
+            Basics.min (model + 1) Constants.max
 
         Decrement ->
-            model - 1
+            Basics.max (model - 1) Constants.min
 
 
 
