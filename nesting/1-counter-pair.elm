@@ -55,7 +55,7 @@ update message model =
             { model | bottomCounter = Counter.update msg model.bottomCounter }
 
         Swap ->
-            init model.bottomCounter model.topCounter
+            { model | topCounter = model.bottomCounter, bottomCounter = model.topCounter }
 
 
 
