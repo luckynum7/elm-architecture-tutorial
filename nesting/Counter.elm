@@ -80,17 +80,27 @@ view : Model -> Html Msg
 view model =
     div []
         [ button [ onClick Decrement ] [ text "-" ]
-        , div [ countStyle ] [ text (toString model) ]
+        , div [ countStyle model ] [ text (toString model) ]
         , button [ onClick Increment ] [ text "+" ]
         ]
 
 
-countStyle : Attribute msg
-countStyle =
-    style
-        [ ( "font-size", "20px" )
-        , ( "font-family", "monospace" )
-        , ( "display", "inline-block" )
-        , ( "width", "50px" )
-        , ( "text-align", "center" )
-        ]
+countStyle : Model -> Attribute msg
+countStyle model =
+    let
+        color =
+            if model == Constants.maximum then
+                "#ff3300"
+            else if model == Constants.minimum then
+                "#0033ff"
+            else
+                ""
+    in
+        style
+            [ ( "font-size", "20px" )
+            , ( "font-family", "monospace" )
+            , ( "display", "inline-block" )
+            , ( "width", "50px" )
+            , ( "text-align", "center" )
+            , ( "color", color )
+            ]
