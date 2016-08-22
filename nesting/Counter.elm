@@ -30,7 +30,10 @@ init count =
 type Msg
     = Increment
     | Decrement
-    | TimelyIncrement Time.Time
+
+
+
+-- | TimelyIncrement Time.Time
 
 
 update : Msg -> Model -> Model
@@ -42,15 +45,17 @@ update msg model =
         Decrement ->
             decrement model 1
 
-        TimelyIncrement time ->
-            let
-                tick =
-                    floor time % 3
-            in
-                if tick == 0 then
-                    increment model 1
-                else
-                    model
+
+
+-- TimelyIncrement time ->
+--     let
+--         tick =
+--             floor time % 3
+--     in
+--         if tick == 0 then
+--             increment model 1
+--         else
+--             model
 
 
 increment : Model -> Int -> Model
@@ -65,14 +70,9 @@ decrement num delta =
 
 
 -- SUBSCRIPTIONS
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Time.every second TimelyIncrement
-
-
-
+-- subscriptions : Model -> Sub Msg
+-- subscriptions model =
+--     Time.every second TimelyIncrement
 -- VIEW
 
 
