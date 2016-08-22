@@ -1,9 +1,9 @@
 module Constants exposing (..)
 
 
-max =
-    10
+maximum =
+    100
 
 
-min =
-    -10
+minimum =
+    -100

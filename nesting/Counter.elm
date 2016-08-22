@@ -1,8 +1,9 @@
-module Counter exposing (Model, Msg, init, update, view)
+module Counter exposing (Model, Msg, init, update, subscriptions, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
+import Time exposing (second)
 
 
 -- Project imports
@@ -29,16 +30,36 @@ init count =
 type Msg
     = Increment
     | Decrement
+    | TimelyIncrement Time.Time
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment ->
-            Basics.min (model + 1) Constants.max
+            Basics.min (model + 1) Constants.maximum
 
         Decrement ->
-            Basics.max (model - 1) Constants.min
+            Basics.max (model - 1) Constants.minimum
+
+        TimelyIncrement time ->
+            let
+                tick =
+                    floor time % 3
+            in
+                if tick == 0 then
+                    Basics.min (model + 1) Constants.maximum
+                else
+                    model
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Time.every second TimelyIncrement
 
 
 
