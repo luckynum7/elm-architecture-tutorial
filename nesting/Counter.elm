@@ -37,10 +37,10 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment ->
-            Basics.min (model + 1) Constants.maximum
+            increment model 2
 
         Decrement ->
-            Basics.max (model - 1) Constants.minimum
+            decrement model 1
 
         TimelyIncrement time ->
             let
@@ -48,9 +48,19 @@ update msg model =
                     floor time % 3
             in
                 if tick == 0 then
-                    Basics.min (model + 1) Constants.maximum
+                    increment model 1
                 else
                     model
+
+
+increment : Model -> Int -> Model
+increment num delta =
+    Basics.min (num + delta) Constants.maximum
+
+
+decrement : Model -> Int -> Model
+decrement num delta =
+    Basics.max (num - delta) Constants.minimum
 
 
 
