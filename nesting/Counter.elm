@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Time exposing (second)
+import String exposing (padLeft)
 
 
 -- Project imports
@@ -15,12 +16,15 @@ import Constants
 
 
 type alias Model =
-    Int
+    { count : Int
+    , incr : Int
+    , decr : Int
+    }
 
 
 init : Int -> Model
 init count =
-    count
+    Model count 0 0
 
 
 
@@ -59,13 +63,21 @@ update msg model =
 
 
 increment : Model -> Int -> Model
-increment num delta =
-    Basics.min (num + delta) Constants.maximum
+increment model delta =
+    let
+        count =
+            Basics.min (model.count + delta) Constants.maximum
+    in
+        { model | count = count, incr = model.incr + 1 }
 
 
 decrement : Model -> Int -> Model
-decrement num delta =
-    Basics.max (num - delta) Constants.minimum
+decrement model delta =
+    let
+        count =
+            Basics.max (model.count - delta) Constants.minimum
+    in
+        { model | count = count, decr = model.decr + 1 }
 
 
 
@@ -79,19 +91,26 @@ decrement num delta =
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick Decrement ] [ text "-" ]
-        , div [ countStyle model ] [ text (toString model) ]
+        [ span [] [ text (viewClick model.decr) ]
+        , button [ onClick Decrement ] [ text "-" ]
+        , div [ countStyle model ] [ text (toString model.count) ]
         , button [ onClick Increment ] [ text "+" ]
+        , span [] [ text (viewClick model.incr) ]
         ]
+
+
+viewClick : Int -> String
+viewClick num =
+    padLeft 2 '0' (toString num)
 
 
 countStyle : Model -> Attribute msg
 countStyle model =
     let
         color =
-            if model == Constants.maximum then
+            if model.count == Constants.maximum then
                 "#ff3300"
-            else if model == Constants.minimum then
+            else if model.count == Constants.minimum then
                 "#0033ff"
             else
                 ""
