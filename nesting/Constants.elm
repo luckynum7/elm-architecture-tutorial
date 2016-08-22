@@ -6,4 +6,4 @@ maximum =
 
 
 minimum =
-    -100
+    -50
