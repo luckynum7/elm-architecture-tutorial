@@ -98,7 +98,7 @@ getRandomGif : String -> Cmd Msg
 getRandomGif topic =
     let
         url =
-            "//api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&rating=pg&tag=" ++ topic
+            "https//api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&rating=pg&tag=" ++ topic
     in
         Task.perform FetchFail FetchSucceed (Http.get decodeGifUrl url)
 
